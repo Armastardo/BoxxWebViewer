@@ -17,7 +17,7 @@ function addDivs(){
 }
 
 function colorCircles(value){
-  for(let i = 1; i < 21; i++){
+  for(let i = 1; i <= 21; i++){
     const bitValue = value[i-1];
     const circleElement = document.getElementById('circle' + i);
 
