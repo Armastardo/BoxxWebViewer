@@ -1,38 +1,50 @@
 let portButton;
 let webserial;
+const TOTAL_BACKGROUDNS = 3;
+let currentStyle = 1;
 
-function addDivs(){
-  for (let i = 1; i <= 21; i++) {
-    const div = document.createElement('div');
-    div.className = 'div' + i;
+function changeStyle(){
+  background = document.getElementById("background");
 
-    const circle = document.createElement('div');
-    circle.id = 'circle' + i;
-    circle.className = 'circle';
-    div.appendChild(circle);
+  if(currentStyle === 3) currentStyle = 1
+  else currentStyle++;
 
-    document.getElementById('grid-parent').appendChild(div);
+  background.src = "images/background" + currentStyle + ".png";
 }
 
+function createButtons(){
+  const container = document.getElementById("viewer");
+  for (let i = 1; i <= 21; i++) {
+    const div = document.createElement('img');
+    div.id = 'button' + i;
+    div.classList.add("button");
+    div.src = "images/" + i + ".png";
+    div.style.visibility="hidden";
+    container.appendChild(div);
+  }
 }
 
 function colorCircles(value){
   for(let i = 1; i <= 21; i++){
     const bitValue = value[i-1];
-    const circleElement = document.getElementById('circle' + i);
+    const button = document.getElementById('button' + i);
 
      //Illuminate the circle if the corresponding bit is 1
     if (bitValue != 0) {
-      circleElement.classList.add('on');
+      button.style.visibility="visible";
     } else {
-      circleElement.classList.remove('on');
+      button.style.visibility="hidden";
     }
   }
 }
 
 function setup() {
-  addDivs();
-  //drawCircles();
+  createButtons()
+
+
+  portButton = document.getElementById("logo");
+  portButton.addEventListener("click", changeStyle);
+
   webserial = new WebSerialPort();
   if (webserial) {
     webserial.on("data", serialRead);
