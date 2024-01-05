@@ -21,7 +21,7 @@ body {
     right: 30px;
     cursor: pointer;
     transition: 0.4s;
-
+    z-index: 5;
 }
 
 #logo:hover {
@@ -49,7 +49,7 @@ body {
     left: 0;
     right: 0;
     z-index: 1;
-    
+
     -webkit-filter: drop-shadow(2px 1px 0 white)
     drop-shadow(-1px -1px 0 white);
     filter: drop-shadow(2px 1px 0 white) 
